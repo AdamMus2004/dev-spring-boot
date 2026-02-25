@@ -26,14 +26,14 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeDAO.findById(id);
     }
 
-    @Override
     @Transactional
+    @Override
     public Employee save(Employee employee) {
         return employeeDAO.save(employee);
     }
 
-    @Override
     @Transactional
+    @Override
     public void deleteById(int id) {
         employeeDAO.deleteById(id);
     }
