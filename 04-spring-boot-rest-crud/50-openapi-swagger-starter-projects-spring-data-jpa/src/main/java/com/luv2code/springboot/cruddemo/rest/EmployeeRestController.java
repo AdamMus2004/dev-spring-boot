@@ -1,7 +1,7 @@
 package com.luv2code.springboot.cruddemo.rest;
 
+import com.luv2code.springboot.cruddemo.dao.EmployeeRepository;
 import com.luv2code.springboot.cruddemo.entity.Employee;
-import com.luv2code.springboot.cruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tools.jackson.databind.json.JsonMapper;
@@ -13,23 +13,23 @@ import java.util.Map;
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-    private EmployeeService employeeService;
+    private EmployeeRepository employeeRepository;
     private JsonMapper jsonMapper;
 
     @Autowired
-    public EmployeeRestController(EmployeeService employeeService,JsonMapper jsonMapper){
+    public EmployeeRestController(EmployeeRepository employeeRepository,JsonMapper jsonMapper){
         this.jsonMapper=jsonMapper;
-        this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
-        return employeeService.findAll();
+        return employeeRepository.findAll();
     }
 
     @GetMapping("/employees/{id}")
     public Employee getEmployeeById(@PathVariable int id) {
-        Employee employee = employeeService.findById(id);
+        Employee employee = employeeRepository.getReferenceById(id);
         if (employee==null) {
             throw new RuntimeException("Employee id not found - "+id);
         } else {
@@ -40,28 +40,28 @@ public class EmployeeRestController {
     @PostMapping("/employees")
     public Employee saveEmployee(@RequestBody Employee employee) {
         employee.setId(0);
-        Employee dbEmployee = employeeService.save(employee);
+        Employee dbEmployee = employeeRepository.save(employee);
         return dbEmployee;
     }
 
     @DeleteMapping("/employees/{id}")
     public String deleteEmployeesById(@PathVariable int id){
-        Employee employee = employeeService.findById(id);
+        Employee employee = employeeRepository.getReferenceById(id);
         if (employee==null) {
             throw new RuntimeException("Employee id not found - "+id);
         }
-        employeeService.deleteById(id);
+        employeeRepository.deleteById(id);
         return "Employee with id - "+ id + " successfully removed.";
     }
 
     @PutMapping("/employees")
     public Employee updateEmployee(@RequestBody Employee employee) {
-       Employee dbEmployee = employeeService.save(employee);
-       return dbEmployee;
+        Employee dbEmployee = employeeRepository.save(employee);
+        return dbEmployee;
     }
     @PatchMapping("/employees/{id}")
     public Employee patchEmployee(@PathVariable int id, @RequestBody Map<String, Object> patchPayload) {
-        Employee tempEmployee = employeeService.findById(id);
+        Employee tempEmployee = employeeRepository.getReferenceById(id);
 
         if (tempEmployee == null) {
             throw new RuntimeException("Employee id not found - "+id);
@@ -72,7 +72,7 @@ public class EmployeeRestController {
         }
 
         Employee patchedEmployee = jsonMapper.updateValue(tempEmployee,patchPayload);
-        Employee dbEmployee =  employeeService.save(patchedEmployee);
+        Employee dbEmployee =  employeeRepository.save(patchedEmployee);
         return dbEmployee;
     }
 }
