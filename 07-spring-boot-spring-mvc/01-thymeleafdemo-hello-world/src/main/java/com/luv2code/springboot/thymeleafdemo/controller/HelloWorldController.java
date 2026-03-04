@@ -3,7 +3,9 @@ package com.luv2code.springboot.thymeleafdemo.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloWorldController {
@@ -23,6 +25,17 @@ public class HelloWorldController {
         theName = theName.toUpperCase();
 
         String message = "Yo! "+ theName;
+
+        model.addAttribute("message",message);
+        return "helloworld";
+    }
+
+    @PostMapping("/processFormVersionThree")
+    public String processFormVersionThree(@RequestParam("studentName") String theName, Model model) {
+
+        theName = theName.toUpperCase();
+
+        String message = "Hey! "+ theName;
 
         model.addAttribute("message",message);
         return "helloworld";
