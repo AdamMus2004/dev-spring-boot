@@ -7,6 +7,12 @@
 <body>
 <h3>Student Confirmation Page</h3>
 <br><br>
-Student: <span th:text="${student.firstName} +' '+ ${student.lastName} + ' '+ ${student.country}"> Confirmed
+Student: <span th:text="${student.firstName} +' '+ ${student.lastName}"/>
+<br>
+From: <span th:text="${student.country}"/>
+<br>
+Skill: <span th:text="${student.favouriteLanguage}"/>
+
+
 </body>
 </html>
