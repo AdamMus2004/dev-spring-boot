@@ -11,8 +11,11 @@ Student: <span th:text="${student.firstName} +' '+ ${student.lastName}"/>
 <br>
 From: <span th:text="${student.country}"/>
 <br>
-Skill: <span th:text="${student.favouriteLanguage}"/>
-
-
+Favourite language: <span th:text="${student.favouriteLanguage}"/>
+<br>
+Favourite Operating System:
+<ul>
+    <li th:each="tempSystem : ${student.favouriteSystem}" th:text="${tempSystem}"/>
+</ul>
 </body>
 </html>
