@@ -13,7 +13,14 @@
     <br><br>
     Last name: <input type="text" th:field="${student.lastName}">
     <br><br>
-
+    Country:
+    <select type="text" th:field="${student.country}">
+        <option th:value="Brazil">Brazil</option>
+        <option th:value="Poland">Poland</option>
+        <option th:value="Germany">Germany</option>
+        <option th:value="USA">USA</option>
+    </select>
+    <br><br>
     <input type="submit" value="Submit"/>
 
 </form>
