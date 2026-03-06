@@ -5,7 +5,10 @@
     <title>Customer Confirmation Page</title>
 </head>
 <body>
-    Customer: <span th:text="${customer.firstName +' '+customer.lastName} + ' confirmed'" ></span>
+    Customer confirmed: <span th:text="${customer.firstName +' '+customer.lastName}" ></span>
+    <br>
     Free passes: <span th:text="${customer.freePasses}"></span>
+    <br>
+    Postal code: <span th:text="${customer.postalCode.substring(0,2)} +'-'+${customer.postalCode.substring(2,5)}"></span>
 </body>
 </html>
