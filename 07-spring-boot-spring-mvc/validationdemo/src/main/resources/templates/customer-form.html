@@ -16,13 +16,13 @@
 
     <br><br>
 
-    Last name (*): <input type="password" th:field="${customer.lastName}"/>
+    Last name (*): <input type="text" th:field="${customer.lastName}"/>
     <span th:if="${#fields.hasErrors('lastName')}"
           th:errors="*{lastName}"
           class="error"></span>
 
     <br><br>
-    Free passes(0-10): <input type="number" th:field="${customer.freePasses}"/>
+    Free passes(0-10): <input type="text" th:field="${customer.freePasses}"/>
     <span th:if="${#fields.hasErrors('freePasses')}"
           th:errors="*{freePasses}"
           class="error"></span>
@@ -32,6 +32,12 @@
           th:errors="${customer.postalCode}"
           class="error"></span>
     <br><br>
+    Course Code: <input type="text" th:field="${customer.courseCode}"/>
+    <span th:if="${#fields.hasErrors('courseCode')}"
+          th:errors="${customer.courseCode}"
+          class="error"></span>
+    <br><br>
+
     <input type="submit" value="Submit"/>
 
 </form>
