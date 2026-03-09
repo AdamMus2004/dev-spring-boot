@@ -27,6 +27,12 @@
                     <td th:text="${tempEmp.firstName}"></td>
                     <td th:text="${tempEmp.lastName}"></td>
                     <td th:text="${tempEmp.email}"></td>
+                    <td>
+                        <a th:href="@{/employees/showFormForPut(employeeId=${tempEmp.id})}"
+                           class="btn btn-info btn-sm">
+                            Update
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
