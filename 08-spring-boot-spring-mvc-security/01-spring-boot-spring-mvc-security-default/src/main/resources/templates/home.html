@@ -16,18 +16,22 @@
         <br>
         Role(s): <span sec:authentication="principal.authorities"></span>
     </p>
+    <div sec:authorize="hasRole('MANAGER')">
+        <hr>
+        <p>
+            <a th:href="@{/leaders}">Leadership Meeting</a>
+            (Only for Manager peeps)
+        </p>
+    </div>
 
-    <hr>
-    <p>
-        <a th:href="@{/leaders}">Leadership Meeting</a>
-        (Only for Manager peeps)
-    </p>
+    <div sec:authorize="hasRole('ADMIN')">
     <hr>
     <p>
         <a th:href="@{/systems}">IT Systems Meeting</a>
         (Only for Admin peeps)
     </p>
     <hr>
+    </div>
 
     <form action="#" th:action="@{/logout}" method="post">
         <input type="submit" value="Logout">
