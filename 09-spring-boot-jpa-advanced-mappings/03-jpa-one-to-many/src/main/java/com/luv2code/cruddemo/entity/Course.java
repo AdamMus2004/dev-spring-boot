@@ -18,9 +18,8 @@ public class Course {
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
-    public Course(String title, int id) {
+    public Course(String title) {
         this.title = title;
-        this.id = id;
     }
 
     public Course() {}

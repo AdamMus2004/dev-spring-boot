@@ -1,6 +1,7 @@
 package com.luv2code.cruddemo;
 
 import com.luv2code.cruddemo.dao.AppDAO;
+import com.luv2code.cruddemo.entity.Course;
 import com.luv2code.cruddemo.entity.Instructor;
 import com.luv2code.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -19,11 +20,51 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
 			//createInstructor(appDAO);
+			
 			//findInstructorById(appDAO);
+			
 			//deleteInstructorById(appDAO);
+			
 			//findInstructorDetailById(appDAO);
-			deleteInstructorDetailById(appDAO);
+			
+			//deleteInstructorDetailById(appDAO);
+
+			//createInstructorWithCourses(appDAO);
+
+			findInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void findInstructorWithCourses(AppDAO appDAO) {
+		int theId = 1;
+		System.out.println("Finding instructor id: " + theId);
+
+		Instructor tempInstructor = appDAO.findInstructorById(theId);
+
+		System.out.println("tempInstructor: " +tempInstructor);
+		System.out.println("the associated courses: "+ tempInstructor.getCourses());
+		System.out.println("done!");
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+		Instructor instructorToSave = new Instructor("Sebastian","Kot","seba@luv2code.com");
+
+		InstructorDetail instructorDetail = new InstructorDetail(
+				"https://www.youtube.com/@kfdpl","Board games"
+		);
+
+		instructorToSave.setInstructorDetail(instructorDetail);
+
+		Course tempCourse1 = new Course("Bench Press Course");
+		Course tempCourse2 = new Course("Squat Course");
+
+		instructorToSave.add(tempCourse1);
+		instructorToSave.add(tempCourse2);
+
+
+		System.out.println("Saving instructor: " + instructorToSave);
+		appDAO.save(instructorToSave);
+		System.out.println("Done!");
 	}
 
 	private void deleteInstructorDetailById(AppDAO appDAO) {
