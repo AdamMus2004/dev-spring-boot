@@ -35,8 +35,26 @@ public class CruddemoApplication {
 
 			//findInstructorWithCourses(appDAO);
 			
-			findInstructorWithCoursesJoinFetch(appDAO);
+			//findInstructorWithCoursesJoinFetch(appDAO);
+
+			updateInstructor(appDAO);
 		};
+	}
+
+	private void updateInstructor(AppDAO appDAO) {
+		int theId = 1;
+
+		Instructor tempInstructor = appDAO.findInstructorById(theId);
+
+		System.out.println("tempInstructor before: " + tempInstructor);
+
+		tempInstructor.setFirstName("UpdateTestFirstName");
+
+		System.out.println("tempInstructor after: " + tempInstructor);
+
+		appDAO.update(tempInstructor);
+
+		System.out.println("Done!");
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
