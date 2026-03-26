@@ -37,8 +37,24 @@ public class CruddemoApplication {
 			
 			//findInstructorWithCoursesJoinFetch(appDAO);
 
-			updateInstructor(appDAO);
+			//updateInstructor(appDAO);
+			updateCourse(appDAO);
 		};
+	}
+
+	private void updateCourse(AppDAO appDAO) {
+		int theId = 10;
+
+		Course tempCourse = appDAO.findCourseById(theId);
+
+		System.out.println("Course before update: " + tempCourse);
+
+		tempCourse.setTitle("DeadLift - Sebastian Kot");
+
+		appDAO.update(tempCourse);
+		System.out.println("Course after update: " + tempCourse);
+		System.out.println("Done!");
+
 	}
 
 	private void updateInstructor(AppDAO appDAO) {
