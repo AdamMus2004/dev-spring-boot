@@ -19,14 +19,39 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
-			createCourseAndStudent(appDAO);
+			//createCourseAndStudent(appDAO);
+			//findCourseAndStudent(appDAO);
+			//findStudentAndCourse(appDAO);
+			updateStudent(appDAO);
+
 		};
+	}
+
+	private void findStudentAndCourse(AppDAO appDAO) {
+		int theId = 2;
+
+		Student student = appDAO.findStudentAndCoursesByCourseId(theId);
+
+		System.out.println("Loaded Student: " + student);
+		System.out.println("Course: " +student.getCourses());
+
+		System.out.println("Done!");
+	}
+
+	private void findCourseAndStudent(AppDAO appDAO) {
+		int theId = 10;
+
+		Course course = appDAO.findCourseAndStudentsByCourseId(theId);
+
+
+
+
+		System.out.println("Done!");
 	}
 
 	private void createCourseAndStudent(AppDAO appDAO) {
 		Course course1 = new Course("Java/Spring Boot - course");
-//		Course course2 = new Course("Python/Fast API - course");
-//		Course course3 = new Course("Cooking/Bakery - course");
+
 
 		Student student1 = new Student("Adam", "Mus", "adam@example.com");
 		Student student2 = new Student("Julia", "Wilczynska", "julia@example.com");
@@ -34,14 +59,11 @@ public class CruddemoApplication {
 
 		course1.addStudent(student1);
 		course1.addStudent(student2);
-//		course2.addStudent(student1);
-//		course3.addStudent(student1);
-//		course3.addStudent(student2);
+
 
 
 		appDAO.save(course1);
-//		appDAO.save(course2);
-//		appDAO.save(course3);
+
 
 		System.out.println("Done!");
 	}
