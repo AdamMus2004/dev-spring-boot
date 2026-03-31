@@ -19,12 +19,51 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
-			//createCourseAndStudent(appDAO);
-			//findCourseAndStudent(appDAO);
-			//findStudentAndCourse(appDAO);
-			updateStudent(appDAO);
+//			createCourseAndStudent(appDAO);
+//			findCourseAndStudent(appDAO);
+//			findStudentAndCourse(appDAO);
+//			addMoreCoursesForStudent(appDAO);
+
+			//deleteCourse(appDAO);
+			deleteStudent(appDAO);
+
 
 		};
+	}
+
+	private void deleteStudent(AppDAO appDAO) {
+		int theId = 1;
+
+		appDAO.deleteStudentById(theId);
+
+		System.out.println("Done!");
+	}
+
+	private void deleteCourse(AppDAO appDAO) {
+		int theId = 10;
+
+		appDAO.deleteCourseById(theId);
+		System.out.println("Done!");
+	}
+
+	private void addMoreCoursesForStudent(AppDAO appDAO) {
+		int theId = 2;
+
+		Student tempStudent = appDAO.findStudentAndCoursesByCourseId(theId);
+
+		Course tempCourse1 = new Course("Python in 24h!!! - course");
+		Course tempCourse2 = new Course("Ruby in 24h!!! - course");
+
+		tempStudent.addCourse(tempCourse1);
+		tempStudent.addCourse(tempCourse2);
+
+		System.out.println("Saving Student: "+ tempStudent);
+		System.out.println("Associated courses: " +tempStudent.getCourses());
+
+		appDAO.update(tempStudent);
+		System.out.println("Done!");
+
+
 	}
 
 	private void findStudentAndCourse(AppDAO appDAO) {
