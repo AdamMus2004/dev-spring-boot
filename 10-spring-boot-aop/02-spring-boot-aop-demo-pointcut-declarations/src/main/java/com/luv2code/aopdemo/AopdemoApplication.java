@@ -29,6 +29,12 @@ public class AopdemoApplication {
 		theAccountDAO.addAccount(account,true);
 		theAccountDAO.doWork();
 
+		String name = theAccountDAO.getName();
+		String code = theAccountDAO.getServiceCode();
+
+		theAccountDAO.setName("Adam");
+		theAccountDAO.setServiceCode("2004");
+
 		theMembershipDAO.addAccount();
 		theMembershipDAO.goToSleep();
 
