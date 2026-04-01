@@ -1,6 +1,5 @@
 package com.luv2code.aopdemo.dao;
 
-public interface AccountDAO {
+public interface MembershipDAO {
     void addAccount();
-
 }
