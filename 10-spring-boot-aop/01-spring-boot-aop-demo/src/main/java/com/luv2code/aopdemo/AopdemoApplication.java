@@ -28,7 +28,8 @@ public class AopdemoApplication {
 
 		theMembershipDAO.addAccount();
 
-		theAccountDAO.addAccount();
+		Account account = new Account("Adam","21");
+		theAccountDAO.addAccount(account,true);
 
 	}
 
