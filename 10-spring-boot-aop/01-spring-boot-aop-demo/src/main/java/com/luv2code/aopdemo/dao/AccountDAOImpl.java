@@ -12,4 +12,10 @@ public class AccountDAOImpl implements AccountDAO{
     public void addAccount(Account theAccount, boolean VIP) {
         System.out.println(getClass().getSimpleName() + ": DOING MY DB WORK: ADDING AN ACCOUNT");
     }
+
+    @Override
+    public boolean doWork() {
+        System.out.println(getClass().getSimpleName() + ": doWork()");
+        return false;
+    }
 }
