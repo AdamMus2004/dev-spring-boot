@@ -1,36 +1,34 @@
 package com.luv2code.aopdemo.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
+@Order(2)
 public class MyDemoLoggingAspect {
 
-    @Pointcut("execution(*  com.luv2code.aopdemo.dao.*.*(..))")
-    private void forDaoPackage() {}
 
-    @Pointcut("execution(* com.luv2code.aopdemo.dao.*.get*())")
-    private void getter() {}
+    @Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.forDaoPackageWithoutGetterAndSetters()")
+    public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
 
-    @Pointcut("execution(* com.luv2code.aopdemo.dao.*.set*())")
-    private void setter() {}
+        System.out.println("\n======>>>> Executing @Before advice on addAccount()");
 
-    @Pointcut("forDaoPackage() && !(getter() || setter())")
-    private void forDaoPackageWithoutGetterAndSetters() {}
+        MethodSignature methodSignature = (MethodSignature) theJoinPoint.getSignature();
+
+        System.out.println("Method: "+methodSignature);
+
+        Object[] args = theJoinPoint.getArgs();
+
+        for (Object o : args) {
+            System.out.println("Argument: "+o);
+        }
+    }
 
 
-    @Before("forDaoPackageWithoutGetterAndSetters()")
-    public void beforeAddAccountAdvice() {
-        System.out.println("\n======>>>> Executing @Before advice on addAccount()");}
 
-    @Before("forDaoPackageWithoutGetterAndSetters()")
-    public void performApiAnalytics() {
-        System.out.println("\n======>>>> Performing API analytics");}
-
-    @Before("forDaoPackageWithoutGetterAndSetters()")
-    public void logToCloudAsync() {
-        System.out.println("\n======>>>> Logging to Cloud in async fashion");}
 }
