@@ -20,7 +20,11 @@ public class AccountDAOImpl implements AccountDAO{
     }
 
     @Override
-    public List<Account> findAccounts() {
+    public List<Account> findAccounts(boolean tripWare) {
+
+        if (tripWare) {
+            throw new RuntimeException("NO soup for you!!!");
+        }
 
         List<Account> myAccounts = new ArrayList<>();
 
@@ -33,6 +37,11 @@ public class AccountDAOImpl implements AccountDAO{
         myAccounts.add(account3);
 
         return myAccounts;
+    }
+
+    @Override
+    public List<Account> findAccounts() {
+        return findAccounts(false);
     }
 
     @Override
@@ -60,4 +69,5 @@ public class AccountDAOImpl implements AccountDAO{
         System.out.println(getClass().getSimpleName() + ": in setServiceCode()");
         this.serviceCode = serviceCode;
     }
+
 }
